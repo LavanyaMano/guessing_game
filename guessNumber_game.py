@@ -1,7 +1,7 @@
 import random
 import math
-# import argv from sys
-# guesses = argv
+import pdb
+from sys import argv
 
 
 def main():
@@ -31,18 +31,21 @@ def display_invalid_option(menu_selection):
 		print("\n{} is not a number, please enter a number \n". format(menu_selection))
 
 def game():
+	script, guesses = argv
 	print("We are gonna play of guessing number. \n")
 	print("You win if the number is same as mine or you lose.\n")
 	print("Guess a number between 0 and 10.")
-	user_guess = int(input("> "))
-	guesses = 2
+	user_guess = 0
+	#guesses = 2
 	random_number = math.floor(random.random()*10)
 	old_guess = []
 	flag = False
-	while guesses>0:	
+	guesses = int(guesses)
+	while guesses >0:	
+		user_guess = int(input("> "))
 		if (user_guess in old_guess):
-			print("This number is guesses already.\n Guess a new number: ")
-			user_guess = int(input("> "))
+			print("This number is guessed already.\n Guess a new number: ")
+			continue
 		else:
 			if user_guess == random_number:
 				print("You win")
@@ -51,17 +54,15 @@ def game():
 			elif user_guess > random_number:
 				print("Your number is too high.")
 				print("Guess Again.")
-				user_guess = int(input("> "))
 			else:
 				print("Your number is too low.")
 				print("Guess Again.")
-				user_guess = int(input("> "))
-
 			old_guess.append(user_guess)
+			#pdb.set_trace()
 			guesses= guesses-1
 
 	if flag:
-		main()
+		pass
 	else:
 		print("You Lose")
 
